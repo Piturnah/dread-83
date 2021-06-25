@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void UpdatePosition(Vector3 dir, float multiplier) {
-        transform.Translate(dir * multiplier * Time.deltaTime);
+        transform.Translate(dir.normalized * multiplier * Time.deltaTime);
     }
 
     void Dash() {

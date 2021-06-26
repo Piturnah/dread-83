@@ -3,48 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    float speed = 10f;
+    public float speed = 10f;
+    public float smoothMoveTime = .05f;
+    public float turnSpeed = 15;
 
-    float dashAcc = 40f;
-    float dashSpeed = 70f;
-    bool dashing = false;
-    float dashPeriod = 0.2f;
-    float dashStart;
+    float angle;
+    float smoothInputMagnitude;
+    float smoothMoveVelocity;
 
-    Vector3 currentDirection;
-    Vector3 dashVelocity;
+    float inputMagnitude;
+    float prevInputMagnitude;
 
     private void Update() {
+        Vector3 inputDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        prevInputMagnitude = inputMagnitude;
+        inputMagnitude = inputDirection.magnitude;
+        smoothInputMagnitude = Mathf.SmoothDamp(smoothInputMagnitude, inputMagnitude, ref smoothMoveVelocity, smoothMoveTime);
 
-        if (Input.GetAxisRaw("Fire1") == 1) {
-            dashing = true;
-            dashStart = Time.time;
+        float targetAngle = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg * inputMagnitude;
+        angle = (prevInputMagnitude == 0)? targetAngle : Mathf.LerpAngle(angle, targetAngle, Time.deltaTime * turnSpeed * inputMagnitude);
+        if (inputMagnitude != 0) {
+            transform.eulerAngles = Vector3.up * angle;
         }
 
-        if (!dashing) {
-            currentDirection = DetectMovementInput();
-            UpdatePosition(currentDirection, speed);
-        } else {
-            Dash();
-        }
-    }
-
-    Vector3 DetectMovementInput() {
-
-        return new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-    }
-
-    void UpdatePosition(Vector3 dir, float multiplier) {
-        transform.Translate(dir.normalized * multiplier * Time.deltaTime);
-    }
-
-    void Dash() {
-        speed = Mathf.Min(speed + dashAcc, dashSpeed);
-        UpdatePosition(currentDirection, speed);
-
-        if (Time.time >= dashStart + dashPeriod) {
-            dashing = false;
-            speed = 10;
-        }
+        transform.Translate(transform.forward * speed * smoothInputMagnitude * Time.deltaTime, Space.World);
     }
 }

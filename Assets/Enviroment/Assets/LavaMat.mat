@@ -40,7 +40,7 @@ Material:
     m_Floats:
     - BubbleFPS: 68.05
     m_Colors:
-    - BaseColour: {r: 0, g: 0, b: 0, a: 0}
+    - BaseColour: {r: 0.9339623, g: 0.06693956, b: 0.030838395, a: 0}
     - GlowColour: {r: 1, g: 0.34963, b: 0, a: 0}
-    - LavaColour: {r: 0.8980392, g: 0.2390303, b: 0.172549, a: 0}
+    - LavaColour: {r: 0.8980392, g: 0.64737976, b: 0.17254902, a: 0}
   m_BuildTextureStacks: []

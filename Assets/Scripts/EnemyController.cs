@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
 
     private void Update() {
         direction = (playerTransform.position - transform.position).normalized;
+        direction = new Vector3(direction.x, 0, direction.z);
         Move();
     }
 

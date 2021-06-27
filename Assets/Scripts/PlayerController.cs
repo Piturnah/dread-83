@@ -17,6 +17,12 @@ public class PlayerController : MonoBehaviour {
     float slamCooldown = 1f;
     float prevSlamTime;
 
+    float dashDelay = .5f;
+    float dashCooldown = 0f;
+    float dashDistance = 10f;
+    float startDashTime;
+    bool dashing = false;
+
     float inputMagnitude;
     float prevInputMagnitude;
 
@@ -29,7 +35,15 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         if (rb.velocity.magnitude < 1f) {
-            PerformMovement();
+            if (!dashing) {
+                PerformMovement();
+            }
+            else {
+                if (Time.time >= startDashTime + dashDelay) {
+                    transform.Translate(transform.forward * dashDistance, Space.World);
+                    dashing = false;
+                }
+            }
         }
     }
 
@@ -56,6 +70,11 @@ public class PlayerController : MonoBehaviour {
         }
 
         transform.Translate(transform.forward * speed * smoothInputMagnitude * Time.deltaTime, Space.World);
+
+        if (Input.GetKeyDown(KeyCode.E) && Time.time >= startDashTime + dashCooldown + dashDelay) {
+            dashing = true;
+            startDashTime = Time.time;
+        }
     }
 
     void TakeDamage(float amount) {

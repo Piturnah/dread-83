@@ -8,12 +8,13 @@ public class EnemyController : MonoBehaviour
     float separationSpeed = 5f;
     float turnSpeed = 13f;
 
-    float angle;
+    public float angle;
     Vector3 targetDirection;
 
     Transform playerTransform;
     Animator animator;
-    bool slamming = false;
+    public bool slamming = false;
+    public bool slamDamage = false;
     float startSlamTime;
     float slamDuration = 1f;
     float separateRadius = 2f;
@@ -37,7 +38,6 @@ public class EnemyController : MonoBehaviour
             int enemiesInRange = 0;
             foreach(Collider hit in hits) {
                 if (hit.GetComponent<EnemyController>() && hit.transform != transform) {
-                    Debug.Log("Enemy spotted");
                     Vector3 displacement = (hit.transform.position - transform.position);
                     Vector3 enemyDir = new Vector3(displacement.x, 0, displacement.y).normalized;
                     congregateDirection += enemyDir;
@@ -64,6 +64,9 @@ public class EnemyController : MonoBehaviour
         } else { // Slamming
             if (startSlamTime + slamDuration <= Time.time) {
                 slamming = false;
+                slamDamage = false;
+            } else if (startSlamTime + 0.2f <= Time.time) {
+                slamDamage = true;
             }
         }
     }

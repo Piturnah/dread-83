@@ -14,11 +14,33 @@ public class PlayerController : MonoBehaviour {
     float smoothInputMagnitude;
     float smoothMoveVelocity;
 
+    float slamCooldown = 1f;
+    float prevSlamTime;
+
     float inputMagnitude;
     float prevInputMagnitude;
 
+    Rigidbody rb;
+    float slamForce = 350f;
+
+    private void Awake() {
+        rb = gameObject.GetComponent<Rigidbody>();
+    }
+
     private void Update() {
-        PerformMovement();
+        if (rb.velocity.magnitude < 1f) {
+            PerformMovement();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (Time.time > prevSlamTime + slamCooldown && other.tag == "EnemyAttack") {
+            EnemyController enemyController = other.GetComponentInParent<EnemyController>();
+            if (enemyController.slamDamage) {
+                prevSlamTime = Time.time;
+                rb.AddForce(slamForce * new Vector3(Mathf.Sin(Mathf.Deg2Rad * enemyController.angle), 0, Mathf.Cos(Mathf.Deg2Rad * enemyController.angle)));
+            }
+        }
     }
 
     void PerformMovement() {

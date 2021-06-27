@@ -30,6 +30,21 @@ ModelImporter:
   - first:
       74: 7726494884126237412
     second: Armature|Running_Char
+  - first:
+      74: -7118674957655483468
+    second: Running.001
+  - first:
+      74: -6621320482603874202
+    second: Player Armeture|ArmatureAction.002
+  - first:
+      74: -7131329329689715949
+    second: Player Armeture|Attack
+  - first:
+      74: -2841332172651812567
+    second: Player Armeture|Idle
+  - first:
+      74: 2647368779833256836
+    second: Player Armeture|Running
   externalObjects: {}
   materials:
     materialImportMode: 2

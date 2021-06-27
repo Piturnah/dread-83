@@ -12,6 +12,12 @@ ModelImporter:
   - first:
       74: -8644699107237885087
     second: Armature.002|Running_Char
+  - first:
+      74: 7262417059343235457
+    second: Cloak Armeture|ArmatureAction.002
+  - first:
+      74: -4996940160303261259
+    second: Cloak Armeture|Attack
   externalObjects: {}
   materials:
     materialImportMode: 2

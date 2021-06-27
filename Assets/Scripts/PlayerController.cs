@@ -37,6 +37,10 @@ public class PlayerController : MonoBehaviour {
 
     Animator[] playerAnimator;
 
+    float lastAttackTime = 0;
+    float attackCooldown = .3f;
+    bool attacking = true;
+
     private void Awake() {
         rb = gameObject.GetComponent<Rigidbody>();
 
@@ -80,9 +84,17 @@ public class PlayerController : MonoBehaviour {
     }
 
     void PerformMovement() {
+        if (attacking && Time.time >= lastAttackTime + .167f) {
+            attacking = false;
+        } else if (Input.GetKeyDown(KeyCode.Mouse0) && Time.time >= lastAttackTime + attackCooldown) {
+            attacking = true;
+            lastAttackTime = Time.time;
+        }
+
         Vector3 rawInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         foreach (Animator anim in playerAnimator) {
             anim.SetBool("MovementInput", rawInput.magnitude > 0);
+            anim.SetBool("Attacking", attacking);
         }
 
         Vector3 inputDirection = rawInput.normalized;

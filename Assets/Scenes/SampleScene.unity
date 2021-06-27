@@ -395,7 +395,6 @@ GameObject:
   - component: {fileID: 515344101}
   - component: {fileID: 515344100}
   - component: {fileID: 515344103}
-  - component: {fileID: 515344099}
   - component: {fileID: 515344104}
   m_Layer: 0
   m_Name: Enemy
@@ -404,19 +403,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &515344099
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 515344097}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.0000038, y: 4.4412165, z: 0.61294997}
-  m_Center: {x: 0, y: 2.2205005, z: 0}
 --- !u!23 &515344100
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1155,6 +1141,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1799793514}
   - component: {fileID: 1799793513}
+  - component: {fileID: 1799793515}
+  - component: {fileID: 1799793516}
   m_Layer: 0
   m_Name: EnemyEmpty
   m_TagString: Untagged
@@ -1189,6 +1177,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1799793515
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799793512}
+  serializedVersion: 2
+  m_Mass: 66.61
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 122
+  m_CollisionDetection: 0
+--- !u!65 &1799793516
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799793512}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.06, y: 4.47, z: 0.64}
+  m_Center: {x: 0, y: 2.21, z: 0}
 --- !u!1001 &1836603034
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1532,7 +1549,7 @@ PrefabInstance:
     - target: {fileID: 1488849744159777464, guid: b3fd7c375c691fb4685b04c52eed7e80,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3fd7c375c691fb4685b04c52eed7e80, type: 3}

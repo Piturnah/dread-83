@@ -13,6 +13,8 @@ public class EnemyController : MonoBehaviour
     Transform playerTransform;
     Animator animator;
     bool slamming = false;
+    float startSlamTime;
+    float slamDuration = 1;
 
     private void Awake() {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -24,19 +26,27 @@ public class EnemyController : MonoBehaviour
     }
 
     void Move() {
-        targetDirection = (playerTransform.position - transform.position).normalized;
-        targetDirection = new Vector3(targetDirection.x, 0, targetDirection.z);
+        if (!slamming) {
+            targetDirection = (playerTransform.position - transform.position).normalized;
+            targetDirection = new Vector3(targetDirection.x, 0, targetDirection.z);
 
-        float targetAngle = Mathf.Atan2(targetDirection.x, targetDirection.z) * Mathf.Rad2Deg;
-        angle = Mathf.LerpAngle(angle, targetAngle, Time.deltaTime * turnSpeed);
-        transform.eulerAngles = Vector3.up * angle;
+            float targetAngle = Mathf.Atan2(targetDirection.x, targetDirection.z) * Mathf.Rad2Deg;
+            angle = Mathf.LerpAngle(angle, targetAngle, Time.deltaTime * turnSpeed);
+            transform.eulerAngles = Vector3.up * angle;
 
-        if ((playerTransform.position - transform.position).magnitude > 2f) {
-            transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
-        } else if (slamming == false) {
-            slamming = true;
-            animator.Play("Slam");
-            Debug.Log("Slam time");
+            if ((playerTransform.position - transform.position).magnitude > 2f) {
+                transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
+            }
+            else if (slamming == false) {
+                slamming = true;
+                startSlamTime = Time.time;
+                animator.Play("Slam");
+                Debug.Log("Slam time");
+            }
+        } else { // Slamming
+            if (startSlamTime + slamDuration <= Time.time) {
+                slamming = false;
+            }
         }
     }
 }

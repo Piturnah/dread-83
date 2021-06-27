@@ -19,9 +19,13 @@ public class UIController : MonoBehaviour
     Vector3 overViewRotation = new Vector3(33.168f, 0, 0);
 
     private void Start() {
-        CameraController.cameraState = 1; // state 1 is for intro scene overlooking the cringe
+        CameraController.cameraState = 0;
 
         mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
+    }
+
+    void SetStateOne() {
+        CameraController.cameraState = 1; // state 1 is for intro scene overlooking the cringe
 
         mainCameraTransform.position = overViewPosition;
         mainCameraTransform.eulerAngles = overViewRotation;

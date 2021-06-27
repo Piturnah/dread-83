@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
     public bool slamDamage = false;
     float startSlamTime;
     float slamDuration = 1f;
+
     float separateRadius = 2f;
 
     private void Awake() {
@@ -35,16 +36,16 @@ public class EnemyController : MonoBehaviour
 
             Collider[] hits = Physics.OverlapSphere(transform.position, separateRadius);
             Vector3 congregateDirection = new Vector3(0, 0, 0);
-            int enemiesInRange = 0;
+            int avoidInRange = 0;
             foreach(Collider hit in hits) {
                 if (hit.GetComponent<EnemyController>() && hit.transform != transform) {
                     Vector3 displacement = (hit.transform.position - transform.position);
                     Vector3 enemyDir = new Vector3(displacement.x, 0, displacement.y).normalized;
                     congregateDirection += enemyDir;
-                    enemiesInRange += 1;
+                    avoidInRange += 1;
                 }
             }
-            congregateDirection /= enemiesInRange;
+            congregateDirection /= avoidInRange;
             congregateDirection = congregateDirection.normalized;
 
             targetDirection = (targetDirection - congregateDirection).normalized;

@@ -29,8 +29,12 @@ public class PlayerController : MonoBehaviour {
     Rigidbody rb;
     float slamForce = 350f;
 
+    Animator[] playerAnimator;
+
     private void Awake() {
         rb = gameObject.GetComponent<Rigidbody>();
+
+        playerAnimator = GetComponentsInChildren<Animator>();
     }
 
     private void Update() {
@@ -58,7 +62,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     void PerformMovement() {
-        Vector3 inputDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        Vector3 rawInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        foreach (Animator anim in playerAnimator) {
+            anim.SetBool("MovementInput", rawInput.magnitude > 0);
+        }
+
+        Vector3 inputDirection = rawInput.normalized;
         prevInputMagnitude = inputMagnitude;
         inputMagnitude = inputDirection.magnitude;
         smoothInputMagnitude = Mathf.SmoothDamp(smoothInputMagnitude, inputMagnitude, ref smoothMoveVelocity, smoothMoveTime);

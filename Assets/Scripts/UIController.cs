@@ -15,13 +15,13 @@ public class UIController : MonoBehaviour
     float charDelay = .04f;
 
     private void Start() {
-        CameraController.cameraState = 1; // state 1 is for intro scene overlooking the cringe
+        CameraController.cameraState = 0; // state 1 is for intro scene overlooking the cringe
 
 
     }
 
     private void Update() {
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)) && UIController.finishedDialog) {
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)) && UIController.finishedDialog && CameraController.cameraState == 1) {
             StartCoroutine(Typewriter(dialogs[dialogIndex], charDelay));
         }
     }

@@ -2369,6 +2369,7 @@ Transform:
   m_Children:
   - {fileID: 932868046}
   - {fileID: 639018677}
+  - {fileID: 2112102416}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2388,6 +2389,9 @@ MonoBehaviour:
   speed: 10
   smoothMoveTime: 0.1
   turnSpeed: 8
+  dashObject: {fileID: 8811663958922517337, guid: 6c3c5a2030271414fa624320d370eee0,
+    type: 3}
+  DashEffectEmpty: {fileID: 2112102415}
 --- !u!136 &1975997608
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2689,6 +2693,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2112102415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2112102416}
+  m_Layer: 0
+  m_Name: DashInstantiateEmpty
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2112102416
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112102415}
+  m_LocalRotation: {x: 0, y: 0, z: -0.26572436, w: 0.96404904}
+  m_LocalPosition: {x: 0.287, y: 0.244, z: 0.39}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1975997606}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30.82}
 --- !u!1001 &2115037996
 PrefabInstance:
   m_ObjectHideFlags: 0

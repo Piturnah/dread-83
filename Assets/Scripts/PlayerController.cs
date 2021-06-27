@@ -47,14 +47,6 @@ public class PlayerController : MonoBehaviour {
         if (rb.velocity.magnitude < 1f) {
             if (!dashing) {
                 PerformMovement();
-                if (dashEffectTimeRemaining > 0)
-                {
-                    dashEffectTimeRemaining -= Time.deltaTime;
-                }
-                else
-                {
-                    Destroy(dashEffect);
-                }
             }
             else {
                 if (Time.time >= startDashTime + dashDelay) {
@@ -65,6 +57,15 @@ public class PlayerController : MonoBehaviour {
                     dashing = false;
                 }
             }
+        }
+
+        if (dashEffectTimeRemaining > 0)
+        {
+            dashEffectTimeRemaining -= Time.deltaTime;
+        }
+        else
+        {
+            Destroy(dashEffect);
         }
     }
 

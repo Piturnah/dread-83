@@ -21,6 +21,15 @@ ModelImporter:
   - first:
       74: 919758380320645410
     second: Armature.002|Idle.002
+  - first:
+      74: 1783267901426079022
+    second: cloak|ArmatureAction.002
+  - first:
+      74: -8096055986192954705
+    second: cloak|Attack
+  - first:
+      74: 6830483197787775179
+    second: cloak|Running.420
   externalObjects: {}
   materials:
     materialImportMode: 2

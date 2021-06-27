@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
     public float speed = 10f;
     public float smoothMoveTime = .05f;
     public float turnSpeed = 15;
+    public GameObject dashObject;
+    public GameObject DashEffectEmpty;
 
     float angle;
     float smoothInputMagnitude;
@@ -23,14 +25,22 @@ public class PlayerController : MonoBehaviour {
     float startDashTime;
     bool dashing = false;
 
+    float dashEffectTime = .1f;
+    float dashEffectTimeRemaining;
+    GameObject dashEffect;
+    
     float inputMagnitude;
     float prevInputMagnitude;
 
     Rigidbody rb;
     float slamForce = 350f;
 
+    Animator[] playerAnimator;
+
     private void Awake() {
         rb = gameObject.GetComponent<Rigidbody>();
+
+        playerAnimator = GetComponentsInChildren<Animator>();
     }
 
     private void Update() {
@@ -41,9 +51,21 @@ public class PlayerController : MonoBehaviour {
             else {
                 if (Time.time >= startDashTime + dashDelay) {
                     transform.Translate(transform.forward * dashDistance, Space.World);
+                    dashEffectTimeRemaining = dashEffectTime;
+                    dashEffect = Instantiate(dashObject, DashEffectEmpty.transform);
+                    dashEffect.transform.parent = null;
                     dashing = false;
                 }
             }
+        }
+
+        if (dashEffectTimeRemaining > 0)
+        {
+            dashEffectTimeRemaining -= Time.deltaTime;
+        }
+        else
+        {
+            Destroy(dashEffect);
         }
     }
 
@@ -58,7 +80,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     void PerformMovement() {
-        Vector3 inputDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        Vector3 rawInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        foreach (Animator anim in playerAnimator) {
+            anim.SetBool("MovementInput", rawInput.magnitude > 0);
+        }
+
+        Vector3 inputDirection = rawInput.normalized;
         prevInputMagnitude = inputMagnitude;
         inputMagnitude = inputDirection.magnitude;
         smoothInputMagnitude = Mathf.SmoothDamp(smoothInputMagnitude, inputMagnitude, ref smoothMoveVelocity, smoothMoveTime);

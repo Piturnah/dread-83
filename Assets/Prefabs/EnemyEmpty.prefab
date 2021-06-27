@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3292351084902178210}
   - component: {fileID: 3292351084902178222}
   - component: {fileID: 4562413006961987035}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 3292351085221933103}
   - component: {fileID: 3292351085221933101}
   - component: {fileID: 3292351085221933098}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyEmpty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,6 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angle: 0
   slamming: 0
+  slamDamage: 0
 --- !u!54 &3292351085221933101
 Rigidbody:
   m_ObjectHideFlags: 0

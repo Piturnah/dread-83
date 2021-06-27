@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
 
     private void Awake() {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        animator = GetComponent<Animator>();
+        animator = transform.GetChild(0).GetComponent<Animator>();
     }
 
     private void Update() {
@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
             transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
         } else if (slamming == false) {
             slamming = true;
-            animator.SetTrigger("Slam");
+            animator.Play("Slam");
             Debug.Log("Slam time");
         }
     }

@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
     public float speed = 10f;
     public float smoothMoveTime = .05f;
     public float turnSpeed = 15;
+    public GameObject dashObject;
+    public GameObject DashEffectEmpty;
 
     float angle;
     float smoothInputMagnitude;
@@ -23,6 +25,10 @@ public class PlayerController : MonoBehaviour {
     float startDashTime;
     bool dashing = false;
 
+    float dashEffectTime = .1f;
+    float dashEffectTimeRemaining;
+    GameObject dashEffect;
+    
     float inputMagnitude;
     float prevInputMagnitude;
 
@@ -41,10 +47,21 @@ public class PlayerController : MonoBehaviour {
         if (rb.velocity.magnitude < 1f) {
             if (!dashing) {
                 PerformMovement();
+                if (dashEffectTimeRemaining > 0)
+                {
+                    dashEffectTimeRemaining -= Time.deltaTime;
+                }
+                else
+                {
+                    Destroy(dashEffect);
+                }
             }
             else {
                 if (Time.time >= startDashTime + dashDelay) {
                     transform.Translate(transform.forward * dashDistance, Space.World);
+                    dashEffectTimeRemaining = dashEffectTime;
+                    dashEffect = Instantiate(dashObject, DashEffectEmpty.transform);
+                    dashEffect.transform.parent = null;
                     dashing = false;
                 }
             }

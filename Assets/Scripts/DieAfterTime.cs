@@ -11,7 +11,7 @@ public class DieAfterTime : MonoBehaviour
     {
         if(timeLimit < 0)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
         timeLimit -= Time.deltaTime;
     }

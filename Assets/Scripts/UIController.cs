@@ -14,14 +14,21 @@ public class UIController : MonoBehaviour
     int dialogIndex = 0;
     float charDelay = .04f;
 
+    Transform mainCameraTransform;
+    Vector3 overViewPosition = new Vector3(-2.32f, 105.9f, -59.4f);
+    Vector3 overViewRotation = new Vector3(33.168f, 0, 0);
+
     private void Start() {
-        CameraController.cameraState = 0; // state 1 is for intro scene overlooking the cringe
+        CameraController.cameraState = 1; // state 1 is for intro scene overlooking the cringe
 
+        mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
 
+        mainCameraTransform.position = overViewPosition;
+        mainCameraTransform.eulerAngles = overViewRotation;
     }
 
     private void Update() {
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)) && UIController.finishedDialog && CameraController.cameraState == 1) {
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)) && UIController.finishedDialog && CameraController.cameraState == 1 && dialogIndex <= dialogs.Length) {
             StartCoroutine(Typewriter(dialogs[dialogIndex], charDelay));
         }
     }

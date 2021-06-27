@@ -22,11 +22,4 @@ public class HostageSpawner : MonoBehaviour
             Instantiate(hostage, new Vector3(transform.position.x - (bounds[1]/2) + (instantiationDistance * (i + 1)), transform.position.y, transform.position.z), Quaternion.identity);
         }
     }
-
-
-    //Debug
-    private void Start()
-    {
-        spawnHostage(5);
-    }
 }

@@ -19,7 +19,11 @@
             "m_Id": "b93c9d0b58f24f79965caacef170e733"
         }
     ],
-    "m_Keywords": [],
+    "m_Keywords": [
+        {
+            "m_Id": "5bd95bc6cc2445ff82ee65c68de76fe8"
+        }
+    ],
     "m_Nodes": [
         {
             "m_Id": "6a097611fffa4dc282fd99895db948f8"
@@ -1028,6 +1032,43 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
+    "m_ObjectId": "5bd95bc6cc2445ff82ee65c68de76fe8",
+    "m_Guid": {
+        "m_GuidSerialized": "7a0cfa5d-e658-4487-8bdb-256c04300dba"
+    },
+    "m_Name": "ShadowReceiveOff",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "ShadowReceiveOff",
+    "m_DefaultReferenceName": "SHADOWRECEIVEOFF",
+    "m_OverrideReferenceName": "_RECEIVE_SHADOWS_OFF",
+    "m_GeneratePropertyBlock": true,
+    "m_KeywordType": 1,
+    "m_KeywordDefinition": 0,
+    "m_KeywordScope": 1,
+    "m_Entries": [
+        {
+            "id": 1,
+            "displayName": "A",
+            "referenceName": "A"
+        },
+        {
+            "id": 2,
+            "displayName": "B",
+            "referenceName": "B"
+        },
+        {
+            "id": 3,
+            "displayName": "C",
+            "referenceName": "C"
+        }
+    ],
+    "m_Value": 0,
+    "m_IsEditable": true
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "5cb482160bb6419c8b60a418a247311c",
@@ -1054,9 +1095,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2620.999755859375,
-            "y": 347.9999694824219,
-            "width": 125.99999237060547,
+            "x": -2015.999755859375,
+            "y": 567.0,
+            "width": 126.0,
             "height": 172.99998474121095
         }
     },

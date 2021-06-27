@@ -18,6 +18,9 @@ ModelImporter:
   - first:
       74: -4996940160303261259
     second: Cloak Armeture|Attack
+  - first:
+      74: 919758380320645410
+    second: Armature.002|Idle.002
   externalObjects: {}
   materials:
     materialImportMode: 2

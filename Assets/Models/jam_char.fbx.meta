@@ -45,6 +45,9 @@ ModelImporter:
   - first:
       74: 2647368779833256836
     second: Player Armeture|Running
+  - first:
+      74: -3828583913261678786
+    second: Armature|Running
   externalObjects: {}
   materials:
     materialImportMode: 2

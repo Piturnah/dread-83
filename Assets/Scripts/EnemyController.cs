@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     float speed = 5f;
+    float separationSpeed = 5f;
     float turnSpeed = 13f;
 
     float angle;
@@ -14,7 +15,8 @@ public class EnemyController : MonoBehaviour
     Animator animator;
     bool slamming = false;
     float startSlamTime;
-    float slamDuration = 1;
+    float slamDuration = 1f;
+    float separateRadius = 2f;
 
     private void Awake() {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -27,8 +29,25 @@ public class EnemyController : MonoBehaviour
 
     void Move() {
         if (!slamming) {
-            targetDirection = (playerTransform.position - transform.position).normalized;
-            targetDirection = new Vector3(targetDirection.x, 0, targetDirection.z);
+            targetDirection = (playerTransform.position - transform.position);
+            targetDirection = new Vector3(targetDirection.x, 0, targetDirection.z).normalized;
+
+            Collider[] hits = Physics.OverlapSphere(transform.position, separateRadius);
+            Vector3 congregateDirection = new Vector3(0, 0, 0);
+            int enemiesInRange = 0;
+            foreach(Collider hit in hits) {
+                if (hit.GetComponent<EnemyController>() && hit.transform != transform) {
+                    Debug.Log("Enemy spotted");
+                    Vector3 displacement = (hit.transform.position - transform.position);
+                    Vector3 enemyDir = new Vector3(displacement.x, 0, displacement.y).normalized;
+                    congregateDirection += enemyDir;
+                    enemiesInRange += 1;
+                }
+            }
+            congregateDirection /= enemiesInRange;
+            congregateDirection = congregateDirection.normalized;
+
+            targetDirection = (targetDirection - congregateDirection).normalized;
 
             float targetAngle = Mathf.Atan2(targetDirection.x, targetDirection.z) * Mathf.Rad2Deg;
             angle = Mathf.LerpAngle(angle, targetAngle, Time.deltaTime * turnSpeed);
@@ -41,7 +60,6 @@ public class EnemyController : MonoBehaviour
                 slamming = true;
                 startSlamTime = Time.time;
                 animator.Play("Slam");
-                Debug.Log("Slam time");
             }
         } else { // Slamming
             if (startSlamTime + slamDuration <= Time.time) {

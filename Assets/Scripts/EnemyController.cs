@@ -4,22 +4,39 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    float speed = 7f;
-    Vector3 direction;
+    float speed = 5f;
+    float turnSpeed = 13f;
+
+    float angle;
+    Vector3 targetDirection;
 
     Transform playerTransform;
+    Animator animator;
+    bool slamming = false;
 
     private void Awake() {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        animator = GetComponent<Animator>();
     }
 
     private void Update() {
-        direction = (playerTransform.position - transform.position).normalized;
-        direction = new Vector3(direction.x, 0, direction.z);
         Move();
     }
 
     void Move() {
-        transform.Translate(direction * speed * Time.deltaTime);
+        targetDirection = (playerTransform.position - transform.position).normalized;
+        targetDirection = new Vector3(targetDirection.x, 0, targetDirection.z);
+
+        float targetAngle = Mathf.Atan2(targetDirection.x, targetDirection.z) * Mathf.Rad2Deg;
+        angle = Mathf.LerpAngle(angle, targetAngle, Time.deltaTime * turnSpeed);
+        transform.eulerAngles = Vector3.up * angle;
+
+        if ((playerTransform.position - transform.position).magnitude > 2f) {
+            transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
+        } else if (slamming == false) {
+            slamming = true;
+            animator.SetTrigger("Slam");
+            Debug.Log("Slam time");
+        }
     }
 }

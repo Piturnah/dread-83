@@ -67,8 +67,9 @@ public class EnemyController : MonoBehaviour
                 slamming = false;
                 slamDamage = false;
             } else if (startSlamTime + 0.2f <= Time.time) {
-                slamDamage = true;
+                slamDamage = true;               
             }
+            GetComponent<AudioSource>().Play();
         }
     }
 }

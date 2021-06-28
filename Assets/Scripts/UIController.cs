@@ -48,7 +48,7 @@ public class UIController : MonoBehaviour
     }
 
     private void Update() {
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)) && UIController.finishedDialog && CameraController.cameraState == 1 && dialogIndex <= dialogs.Length) {
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)) && finishedDialog && CameraController.cameraState == 1 && dialogIndex <= dialogs.Length) {
             if (dialogIndex == dialogs.Length) {
                 SetStateZero();
                 return;
@@ -61,6 +61,7 @@ public class UIController : MonoBehaviour
         yield return new WaitForSeconds(4);
         cameraAnimator.enabled = false;
         CameraController.cameraState = 0;
+        FindObjectOfType<EnemySpawn>().SpawnEnemies(10);
     }
 
     IEnumerator Typewriter(string story, float btwCharDelay) {

@@ -1832,7 +1832,7 @@ MonoBehaviour:
     in the lava '
   - The only exception, I will not roll if you succeed in killing all of my minions!
   - Good luck
-  - <WASD to move and press E to dash>
+  - <WASD to move and press SPACE to dash>
 --- !u!1001 &905697835
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2570,25 +2570,21 @@ MonoBehaviour:
   - name: dash
     clip: {fileID: 8300000, guid: 672b1d4345ffb6b4c94f43bf83e26f4b, type: 3}
     volume: 1
-    pitch: 0.1
     loop: 0
     source: {fileID: 0}
   - name: enemy_noise
     clip: {fileID: 8300000, guid: b2cba55b39c9a7a4ba7bf4eea86395ce, type: 3}
     volume: 1
-    pitch: 0.1
     loop: 0
     source: {fileID: 0}
   - name: slam
     clip: {fileID: 8300000, guid: 13689ce937557354bbc523e8be6db77e, type: 3}
     volume: 1
-    pitch: 0.1
     loop: 0
     source: {fileID: 0}
   - name: damage_taken
     clip: {fileID: 8300000, guid: 70267ab7c1dd40646b4b5c3cab0fbd54, type: 3}
     volume: 1
-    pitch: 0.1
     loop: 0
     source: {fileID: 0}
 --- !u!4 &1456311423
@@ -2890,7 +2886,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1664450513
 MonoBehaviour:

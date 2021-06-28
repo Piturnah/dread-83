@@ -9,6 +9,7 @@ public class UIController : MonoBehaviour
     public static bool finishedDialog = true;
 
     public TextMeshProUGUI dialogBox;
+    public Animator cameraAnimator;
 
     public string[] dialogs;
     int dialogIndex = 0;
@@ -20,8 +21,9 @@ public class UIController : MonoBehaviour
 
     private void Start() {
         CameraController.cameraState = 0;
-
         mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
+
+        SetStateOne();
     }
 
     void SetStateOne() {
@@ -29,12 +31,26 @@ public class UIController : MonoBehaviour
 
         mainCameraTransform.position = overViewPosition;
         mainCameraTransform.eulerAngles = overViewRotation;
+
+        dialogBox.transform.parent.gameObject.SetActive(true);
     }
 
     private void Update() {
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)) && UIController.finishedDialog && CameraController.cameraState == 1 && dialogIndex <= dialogs.Length) {
+            if (dialogIndex == dialogs.Length) {
+                dialogBox.transform.parent.gameObject.SetActive(false);
+                cameraAnimator.SetTrigger("PanToPlayer");
+                StartCoroutine(KillAnimator());
+                return;
+            }
             StartCoroutine(Typewriter(dialogs[dialogIndex], charDelay));
         }
+    }
+
+    IEnumerator KillAnimator() {
+        yield return new WaitForSeconds(4);
+        cameraAnimator.enabled = false;
+        CameraController.cameraState = 0;
     }
 
     IEnumerator Typewriter(string story, float btwCharDelay) {

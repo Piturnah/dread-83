@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class RoundControl : MonoBehaviour
 {
-
+    static int NumberOfHostages = 20;
     public GameObject player;
     Vector3 player_pos;
     int global_round_num;
+    int max_round_num = 5;
 
     private void Start()
     {
@@ -29,11 +30,21 @@ public class RoundControl : MonoBehaviour
         if (gos.Length > 0)
         {
             //Lost Round
+            int hostagesToKill = Random.Range(1, 6);
+            NumberOfHostages -= hostagesToKill;
+            FindObjectOfType<HostageSpawner>().spawnHostage(hostagesToKill);
         }
         else
         {
             //Won Round
-            NewRound(global_round_num + 1);
+            if(global_round_num+1 > max_round_num)
+            {
+                //You've won
+            }
+            else
+            {
+                NewRound(global_round_num + 1);
+            }           
         }
     }
 

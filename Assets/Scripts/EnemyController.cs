@@ -20,8 +20,6 @@ public class EnemyController : MonoBehaviour
 
     float separateRadius = 2f;
 
-    public int health = 6;
-    public Material[] matList;
 
     private void Awake() {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -30,22 +28,16 @@ public class EnemyController : MonoBehaviour
 
     private void Update() {
         Move();
-        damageUpdate();
-    }
-
-    void damageUpdate()
-    {
-        gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material = matList[health - 1];
-        if (health == 0 || transform.position.y < -10)
+        if (transform.position.y < -10)
         {
             killed();
         }
     }
 
-    IEnumerator killed()
+    public void killed()
     {
-        animator.SetTrigger("Killed");
-        yield return new WaitForSeconds(1);
+        //animator.SetTrigger("Killed");
+        //yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
 

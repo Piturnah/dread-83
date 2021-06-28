@@ -39,8 +39,8 @@ public class PlayerController : MonoBehaviour {
 
     float lastAttackTime = 0;
     float attackCooldown = .3f;
-    float attackRadius = 10;
-    LayerMask enemies;
+    float attackRadius = 2;
+    public LayerMask enemies;
     bool attacking = true;
 
     private void Awake() {
@@ -94,9 +94,12 @@ public class PlayerController : MonoBehaviour {
             FindObjectOfType<AudioManager>().Play("slash");
             //Check to see if there are enemies within attack range
             Collider[] enemyColliders = Physics.OverlapSphere(transform.position,attackRadius,enemies);
-            foreach(Collider col in enemyColliders)
+            if(enemyColliders.Length > 0)
             {
-                col.gameObject.GetComponent<EnemyController>().health -= 1;
+                foreach (Collider col in enemyColliders)
+                {
+                    col.gameObject.GetComponentInParent<EnemyController>().killed();
+                }
             }
             attacking = true;
             lastAttackTime = Time.time;

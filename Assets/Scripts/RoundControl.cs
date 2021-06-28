@@ -68,6 +68,25 @@ public class RoundControl : MonoBehaviour
         StartCoroutine(wait2SecsNGo(camAnim));
     }
 
+    public void WonRound()
+    {
+        //Won Round
+        if (global_round_num + 1 > max_round_num)
+        {
+            //You've won
+            UI.SetActive(true);
+            Application.Quit();
+        }
+        else
+        {
+            Animator camAnim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
+            CameraController.cameraState = 1;
+            camAnim.enabled = false;
+            camAnim.SetTrigger("Back to idle");
+            StartCoroutine(NextRoundAfterHostageDeath(camAnim));
+        }
+    }
+
     public void winCheck()
     {
         GameObject[] gos;
@@ -80,21 +99,7 @@ public class RoundControl : MonoBehaviour
         }
         else
         {
-            //Won Round
-            if(global_round_num+1 > max_round_num)
-            {
-                //You've won
-                UI.SetActive(true);
-                Application.Quit();
-            }
-            else
-            {
-                Animator camAnim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
-                CameraController.cameraState = 1;
-                camAnim.enabled = false;
-                camAnim.SetTrigger("Back to idle");
-                StartCoroutine(NextRoundAfterHostageDeath(camAnim));
-            }           
+            WonRound();
         }
     }
 

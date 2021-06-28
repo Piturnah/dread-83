@@ -36,8 +36,11 @@ public class EnemyController : MonoBehaviour
 
     public void killed()
     {
-        //animator.SetTrigger("Killed");
-        //yield return new WaitForSeconds(1);
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Enemy");
+        if (gos.Length == 0)
+        {
+            FindObjectOfType<RoundControl>().WonRound();
+        }
         Destroy(gameObject);
     }
 

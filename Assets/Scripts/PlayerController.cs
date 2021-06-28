@@ -74,6 +74,11 @@ public class PlayerController : MonoBehaviour {
         {
             Destroy(dashEffect);
         }
+
+        if (gameObject.transform.position.y < -5)
+        {
+            FindObjectOfType<RoundControl>().InitRoundLoss();
+        }
     }
 
     private void OnTriggerEnter(Collider other) {

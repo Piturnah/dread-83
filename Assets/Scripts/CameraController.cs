@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate() {
         if (cameraState == 0) {
-            transform.position = new Vector3(Mathf.Clamp(playerTransform.position.x, cameraBoundsX.x, cameraBoundsX.y), transform.position.y, Mathf.Clamp(playerTransform.position.z + yOffset, cameraBoundsY.x, cameraBoundsY.y));
+            transform.position = new Vector3(Mathf.Clamp(playerTransform.position.x, cameraBoundsX.x, cameraBoundsX.y), 11.6f, Mathf.Clamp(playerTransform.position.z + yOffset, cameraBoundsY.x, cameraBoundsY.y));
         }
     }
 }

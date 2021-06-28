@@ -6,6 +6,7 @@ public class RoundControl : MonoBehaviour
 {
     static int NumberOfHostages = 20;
     public GameObject player;
+    public GameObject UI;
     Vector3 player_pos;
     int global_round_num;
     int max_round_num = 5;
@@ -79,6 +80,8 @@ public class RoundControl : MonoBehaviour
             if(global_round_num+1 > max_round_num)
             {
                 //You've won
+                UI.SetActive(true);
+                StartCoroutine(end());               
             }
             else
             {
@@ -95,5 +98,11 @@ public class RoundControl : MonoBehaviour
     {
         yield return new WaitForSeconds(90);
         winCheck();
+    }
+
+    IEnumerator end()
+    {
+        yield return new WaitForSeconds(3);
+        Application.Quit();
     }
 }

@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: -7295582256077605594}
   m_Layer: 6
   m_Name: EnemyEmpty
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,7 +207,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 13689ce937557354bbc523e8be6db77e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1ad3756bfe6c8f244bd40f158afcfe7c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.391
   m_Pitch: 1

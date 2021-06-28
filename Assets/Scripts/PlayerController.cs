@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour {
 
     float lastAttackTime = 0;
     float attackCooldown = .3f;
+    float attackRadius = 10;
+    LayerMask enemies;
     bool attacking = true;
 
     private void Awake() {
@@ -90,6 +92,12 @@ public class PlayerController : MonoBehaviour {
             attacking = false;
         } else if (Input.GetKeyDown(KeyCode.Mouse0) && Time.time >= lastAttackTime + attackCooldown) {
             FindObjectOfType<AudioManager>().Play("slash");
+            //Check to see if there are enemies within attack range
+            Collider[] enemyColliders = Physics.OverlapSphere(transform.position,attackRadius,enemies);
+            foreach(Collider col in enemyColliders)
+            {
+                col.gameObject.GetComponent<EnemyController>().health -= 1;
+            }
             attacking = true;
             lastAttackTime = Time.time;
         }

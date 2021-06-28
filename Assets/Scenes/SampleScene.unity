@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1143,6 +1143,80 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1001 &671232933
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 8c557f8b7b4f0d34eb5f2980805aa102,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8c557f8b7b4f0d34eb5f2980805aa102,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.71
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8c557f8b7b4f0d34eb5f2980805aa102,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.81
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8c557f8b7b4f0d34eb5f2980805aa102,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8c557f8b7b4f0d34eb5f2980805aa102,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071094
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8c557f8b7b4f0d34eb5f2980805aa102,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 8.6595606e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8c557f8b7b4f0d34eb5f2980805aa102,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710415
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8c557f8b7b4f0d34eb5f2980805aa102,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 3.21906e-22
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8c557f8b7b4f0d34eb5f2980805aa102,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8c557f8b7b4f0d34eb5f2980805aa102,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8c557f8b7b4f0d34eb5f2980805aa102,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8c557f8b7b4f0d34eb5f2980805aa102,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4c7b179a7eda71840b994649b6efd05c, type: 2}
+    - target: {fileID: 919132149155446097, guid: 8c557f8b7b4f0d34eb5f2980805aa102,
+        type: 3}
+      propertyPath: m_Name
+      value: Domino
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8c557f8b7b4f0d34eb5f2980805aa102, type: 3}
 --- !u!1001 &697914779
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1758,7 +1832,7 @@ MonoBehaviour:
     in the lava '
   - The only exception, I will not roll if you succeed in killing all of my minions!
   - Good luck
-  - <WASD to move and press E to dash>
+  - <WASD to move and press SPACE to dash>
 --- !u!1001 &905697835
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2496,25 +2570,21 @@ MonoBehaviour:
   - name: dash
     clip: {fileID: 8300000, guid: 672b1d4345ffb6b4c94f43bf83e26f4b, type: 3}
     volume: 1
-    pitch: 0.1
     loop: 0
     source: {fileID: 0}
   - name: enemy_noise
     clip: {fileID: 8300000, guid: b2cba55b39c9a7a4ba7bf4eea86395ce, type: 3}
     volume: 1
-    pitch: 0.1
     loop: 0
     source: {fileID: 0}
   - name: slam
     clip: {fileID: 8300000, guid: 13689ce937557354bbc523e8be6db77e, type: 3}
     volume: 1
-    pitch: 0.1
     loop: 0
     source: {fileID: 0}
   - name: damage_taken
     clip: {fileID: 8300000, guid: 70267ab7c1dd40646b4b5c3cab0fbd54, type: 3}
     volume: 1
-    pitch: 0.1
     loop: 0
     source: {fileID: 0}
 --- !u!4 &1456311423
@@ -2816,7 +2886,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1664450513
 MonoBehaviour:

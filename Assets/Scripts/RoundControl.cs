@@ -52,24 +52,30 @@ public class RoundControl : MonoBehaviour
         StartCoroutine(NextRoundAfterHostageDeath(camAnim));
     }
 
+    public void InitRoundLoss() {
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Enemy");
+
+        //Lost Round
+        foreach (GameObject go in gos) {
+            Destroy(go);
+        }
+
+        Animator camAnim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
+        CameraController.cameraState = 1;
+        camAnim.enabled = true;
+        camAnim.Play("IdleAbove");
+        GameObject.FindGameObjectWithTag("DiceBro").GetComponent<Animator>().Play("Roll");
+        StartCoroutine(wait2SecsNGo(camAnim));
+    }
+
     public void winCheck()
     {
         GameObject[] gos;
         gos = GameObject.FindGameObjectsWithTag("Enemy");
         if (gos.Length > 0)
         {
-            //Lost Round
-            foreach (GameObject go in gos) {
-                Destroy(go);
-            }
 
-            Animator camAnim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
-            CameraController.cameraState = 1;
-            camAnim.enabled = true;
-            camAnim.Play("IdleAbove");
-            GameObject.FindGameObjectWithTag("DiceBro").GetComponent<Animator>().Play("Roll");
-            StartCoroutine(wait2SecsNGo(camAnim));
-
+            InitRoundLoss();
 
         }
         else

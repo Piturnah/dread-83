@@ -2025,7 +2025,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -2584,6 +2584,11 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: damage_taken
     clip: {fileID: 8300000, guid: 70267ab7c1dd40646b4b5c3cab0fbd54, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: slash
+    clip: {fileID: 8300000, guid: fe1f75bc2f16d55429f858f29fa3d414, type: 3}
     volume: 1
     loop: 0
     source: {fileID: 0}

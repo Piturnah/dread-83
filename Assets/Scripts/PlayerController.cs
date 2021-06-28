@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour {
         if (attacking && Time.time >= lastAttackTime + .167f) {
             attacking = false;
         } else if (Input.GetKeyDown(KeyCode.Mouse0) && Time.time >= lastAttackTime + attackCooldown) {
+            FindObjectOfType<AudioManager>().Play("slash");
             attacking = true;
             lastAttackTime = Time.time;
         }

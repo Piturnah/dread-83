@@ -7,6 +7,7 @@ public class RoundControl : MonoBehaviour
     static int NumberOfHostages = 20;
     public GameObject player;
     public GameObject UI;
+    public GameObject UI2;
     Vector3 player_pos;
     int global_round_num;
     int max_round_num = -10;
@@ -34,6 +35,13 @@ public class RoundControl : MonoBehaviour
             Debug.Log(DiceCheckSurface.diceResult);
             FindObjectOfType<HostageSpawner>().spawnHostage(DiceCheckSurface.diceResult);
             StartCoroutine(PanTime());
+        }
+
+        if (NumberOfHostages < 0)
+        {
+            //You've won
+            UI2.SetActive(true);
+            Application.Quit();
         }
     }
 

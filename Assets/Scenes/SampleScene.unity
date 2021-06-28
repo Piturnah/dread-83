@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2568,7 +2568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: dash
-    clip: {fileID: 8300000, guid: 672b1d4345ffb6b4c94f43bf83e26f4b, type: 3}
+    clip: {fileID: 8300000, guid: 30e9e5c7380c1fe48a6c6eb47158b2a0, type: 3}
     volume: 1
     loop: 0
     source: {fileID: 0}
@@ -2578,7 +2578,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: slam
-    clip: {fileID: 8300000, guid: 1ad3756bfe6c8f244bd40f158afcfe7c, type: 3}
+    clip: {fileID: 8300000, guid: fccc67b847a3d774fbecdb5ada86dc06, type: 3}
     volume: 1
     loop: 0
     source: {fileID: 0}
@@ -2926,7 +2926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a734aa637c4becc438b97d54a56a66b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1975997605}
 --- !u!4 &1799793514 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3292351085221933100, guid: 89f2938d7e28e6a4dab112d3eb8056b0,

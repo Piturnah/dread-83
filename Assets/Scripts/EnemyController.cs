@@ -61,6 +61,7 @@ public class EnemyController : MonoBehaviour
                 slamming = true;
                 startSlamTime = Time.time;
                 animator.Play("Slam");
+                StartCoroutine(PlayAfterSecs(0.25f));
             }
         } else { // Slamming
             if (startSlamTime + slamDuration <= Time.time) {
@@ -69,7 +70,12 @@ public class EnemyController : MonoBehaviour
             } else if (startSlamTime + 0.2f <= Time.time) {
                 slamDamage = true;               
             }
-            GetComponent<AudioSource>().Play();
+            
         }
+    }
+
+    IEnumerator PlayAfterSecs(float secs) {
+        yield return new WaitForSeconds(secs);
+        GetComponent<AudioSource>().Play();
     }
 }

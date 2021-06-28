@@ -40,7 +40,7 @@ public class RoundControl : MonoBehaviour
         yield return new WaitForSeconds(4);
         anim.enabled = false;
         CameraController.cameraState = 0;
-        NewRound(global_round_num);
+        NewRound(global_round_num + 1);
 
     }
 
@@ -82,14 +82,18 @@ public class RoundControl : MonoBehaviour
             }
             else
             {
-                NewRound(global_round_num + 1);
+                Animator camAnim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
+                CameraController.cameraState = 1;
+                camAnim.enabled = false;
+                camAnim.SetTrigger("Back to idle");
+                StartCoroutine(NextRoundAfterHostageDeath(camAnim));
             }           
         }
     }
 
     IEnumerator roundCountdown()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(90);
         winCheck();
     }
 }

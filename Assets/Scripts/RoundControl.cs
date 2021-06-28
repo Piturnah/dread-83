@@ -9,7 +9,7 @@ public class RoundControl : MonoBehaviour
     public GameObject UI;
     Vector3 player_pos;
     int global_round_num;
-    int max_round_num = 5;
+    int max_round_num = -10;
 
     public GameObject dice;
     bool waitingForDiceResult = false;
@@ -72,7 +72,7 @@ public class RoundControl : MonoBehaviour
     {
         GameObject[] gos;
         gos = GameObject.FindGameObjectsWithTag("Enemy");
-        if (gos.Length > 0)
+        if (gos.Length < 0)
         {
 
             InitRoundLoss();
@@ -85,7 +85,7 @@ public class RoundControl : MonoBehaviour
             {
                 //You've won
                 UI.SetActive(true);
-                StartCoroutine(end());               
+                Application.Quit();
             }
             else
             {
@@ -113,11 +113,5 @@ public class RoundControl : MonoBehaviour
     {
         yield return new WaitForSeconds(10);
         winCheck();
-    }
-
-    IEnumerator end()
-    {
-        yield return new WaitForSeconds(3);
-        Application.Quit();
     }
 }

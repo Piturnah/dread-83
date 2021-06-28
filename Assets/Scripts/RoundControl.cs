@@ -66,12 +66,10 @@ public class RoundControl : MonoBehaviour
             Animator camAnim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
             CameraController.cameraState = 1;
             camAnim.enabled = true;
-            camAnim.Play("HostageIdle");
+            camAnim.Play("IdleAbove");
+            GameObject.FindGameObjectWithTag("DiceBro").GetComponent<Animator>().Play("Roll");
+            StartCoroutine(wait2SecsNGo(camAnim));
 
-            dice.SetActive(true);
-            DiceCheckSurface.diceResult = 0;
-            dice.GetComponent<DiceScript>().TriggerDiceThrow();
-            waitingForDiceResult = true;
 
         }
         else
@@ -94,9 +92,20 @@ public class RoundControl : MonoBehaviour
         }
     }
 
+    IEnumerator wait2SecsNGo(Animator anim) {
+        yield return new WaitForSeconds(2);
+
+        anim.Play("HostageIdle");
+
+        dice.SetActive(true);
+        DiceCheckSurface.diceResult = 0;
+        dice.GetComponent<DiceScript>().TriggerDiceThrow();
+        waitingForDiceResult = true;
+    }
+
     IEnumerator roundCountdown()
     {
-        yield return new WaitForSeconds(90);
+        yield return new WaitForSeconds(10);
         winCheck();
     }
 

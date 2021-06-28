@@ -112,9 +112,12 @@ public class PlayerController : MonoBehaviour {
 
         transform.Translate(transform.forward * speed * smoothInputMagnitude * Time.deltaTime, Space.World);
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= startDashTime + dashCooldown + dashDelay) {
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.E)) && Time.time >= startDashTime + dashCooldown + dashDelay) {
             dashing = true;
             startDashTime = Time.time;
+            foreach (Animator anim in playerAnimator) {
+                anim.SetTrigger("Dash");
+            }
         }
     }
 

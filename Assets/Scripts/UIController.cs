@@ -25,7 +25,7 @@ public class UIController : MonoBehaviour
         CameraController.cameraState = 0;
         mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
 
-        SetStateOne();
+        SetStateZero();
     }
 
     void SetStateOne() {

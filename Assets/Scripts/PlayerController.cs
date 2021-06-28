@@ -54,13 +54,13 @@ public class PlayerController : MonoBehaviour {
             }
             else {
                 if (Time.time >= startDashTime + dashDelay) {
+                    FindObjectOfType<AudioManager>().Play("dash");
                     transform.Translate(transform.forward * dashDistance, Space.World);
                     dashEffectTimeRemaining = dashEffectTime;
                     dashEffect = Instantiate(dashObject, DashEffectEmpty.transform);
                     dashEffect.transform.parent = null;
                     dashing = false;
                 }
-                FindObjectOfType<AudioManager>().Play("dash");
             }
         }
 
@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour {
         if (Time.time > prevSlamTime + slamCooldown && other.tag == "EnemyAttack") {
             EnemyController enemyController = other.GetComponentInParent<EnemyController>();
             if (enemyController.slamDamage) {
+                FindObjectOfType<AudioManager>().Play("damage_taken");
                 prevSlamTime = Time.time;
                 rb.AddForce(slamForce * new Vector3(Mathf.Sin(Mathf.Deg2Rad * enemyController.angle), 0, Mathf.Cos(Mathf.Deg2Rad * enemyController.angle)));
             }
@@ -122,7 +123,6 @@ public class PlayerController : MonoBehaviour {
 
     void TakeDamage(float amount) {
         healthValue -= amount;
-        FindObjectOfType<AudioManager>().Play("damage_taken");
         GameObject.FindGameObjectWithTag("Healthbar").GetComponent<HealthBar>().SetHealthBarValue(healthValue / maxHealth);
     }
 }

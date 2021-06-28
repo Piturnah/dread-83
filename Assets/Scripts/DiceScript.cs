@@ -12,12 +12,10 @@ public class DiceScript : MonoBehaviour
 
     private void Update() {
         diceVelocity = rb.velocity;
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            TriggerDiceThrow();
-        }
     }
 
     public void TriggerDiceThrow() {
+        rb = GetComponent<Rigidbody>();
         float dirX = Random.Range(-500, 500);
         float dirY = Random.Range(-500, 500);
         float dirZ = Random.Range(-500, 500);

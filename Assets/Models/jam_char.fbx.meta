@@ -195,7 +195,7 @@ ModelImporter:
       takeName: player|Running.420
       internalID: 0
       firstFrame: 24
-      lastFrame: 28
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -223,8 +223,8 @@ ModelImporter:
       name: player|Dash
       takeName: player|Running.420
       internalID: 0
-      firstFrame: 39
-      lastFrame: 39
+      firstFrame: 37
+      lastFrame: 41
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

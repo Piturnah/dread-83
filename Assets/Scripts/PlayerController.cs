@@ -113,6 +113,10 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E) && Time.time >= startDashTime + dashCooldown + dashDelay) {
             dashing = true;
             startDashTime = Time.time;
+            foreach (Animator anim in playerAnimator) {
+                anim.SetBool("Dashing", dashing);
+                anim.SetBool("Attacking", attacking);
+            }       
         }
     }
 

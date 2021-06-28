@@ -4,14 +4,27 @@ using UnityEngine;
 
 public class DieAfterTime : MonoBehaviour
 {
-    float timeLimit = 5;
+    public float timeLimit = 5;
+    public bool ParticleSystem = false;
+    public float ParticleLenienceTime = 5;
 
     // Update is called once per frame
     void Update()
     {
         if(timeLimit < 0)
-        {
-            Destroy(gameObject);
+        {           
+            if (ParticleSystem)
+            {
+                GetComponent<ParticleSystem>().Stop();
+                if(timeLimit < 0 - ParticleLenienceTime)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
         timeLimit -= Time.deltaTime;
     }

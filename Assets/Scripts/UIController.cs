@@ -8,6 +8,8 @@ public class UIController : MonoBehaviour
     public static string dialogText;
     public static bool finishedDialog = true;
 
+    public static int currentRound = 0;
+
     public TextMeshProUGUI dialogBox;
     public Animator cameraAnimator;
 
@@ -23,7 +25,7 @@ public class UIController : MonoBehaviour
         CameraController.cameraState = 0;
         mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
 
-        SetStateZero();
+        SetStateOne();
     }
 
     void SetStateOne() {
@@ -39,6 +41,10 @@ public class UIController : MonoBehaviour
         dialogBox.transform.parent.gameObject.SetActive(false);
         cameraAnimator.SetTrigger("PanToPlayer");
         StartCoroutine(KillAnimator());
+    }
+
+    void NewRound() {
+
     }
 
     private void Update() {

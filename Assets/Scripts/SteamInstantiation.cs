@@ -12,7 +12,7 @@ public class SteamInstantiation : MonoBehaviour
 
     float numOfSmokes = 0;
     float countDown;
-    Vector3 smokeDistanceFromPlatform = new Vector3(3,3,3);
+    Vector3 smokeDistanceFromPlatform = Vector3.one * 2;
 
     private void OnDrawGizmos()
     {

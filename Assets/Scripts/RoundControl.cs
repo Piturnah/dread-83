@@ -10,6 +10,9 @@ public class RoundControl : MonoBehaviour
     int global_round_num;
     int max_round_num = 5;
 
+    public GameObject dice;
+    bool waitingForDiceResult = false;
+
     private void Start()
     {
         player_pos = player.transform.position;
@@ -21,6 +24,31 @@ public class RoundControl : MonoBehaviour
         FindObjectOfType<EnemySpawn>().SpawnEnemies(round_num * 5);
         player.transform.position = player_pos;
         global_round_num = round_num;
+        StartCoroutine(roundCountdown());
+    }
+
+    private void Update() {
+        if (waitingForDiceResult && DiceCheckSurface.diceResult != 0) {
+            waitingForDiceResult = false;
+            Debug.Log(DiceCheckSurface.diceResult);
+            FindObjectOfType<HostageSpawner>().spawnHostage(DiceCheckSurface.diceResult);
+            StartCoroutine(PanTime());
+        }
+    }
+
+    IEnumerator NextRoundAfterHostageDeath(Animator anim) {
+        yield return new WaitForSeconds(4);
+        anim.enabled = false;
+        CameraController.cameraState = 0;
+        NewRound(global_round_num);
+
+    }
+
+    IEnumerator PanTime() {
+        yield return new WaitForSeconds(4);
+        Animator camAnim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
+        camAnim.SetTrigger("Back to idle");
+        StartCoroutine(NextRoundAfterHostageDeath(camAnim));
     }
 
     public void winCheck()
@@ -30,9 +58,20 @@ public class RoundControl : MonoBehaviour
         if (gos.Length > 0)
         {
             //Lost Round
-            int hostagesToKill = Random.Range(1, 6);
-            NumberOfHostages -= hostagesToKill;
-            FindObjectOfType<HostageSpawner>().spawnHostage(hostagesToKill);
+            foreach (GameObject go in gos) {
+                Destroy(go);
+            }
+
+            Animator camAnim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
+            CameraController.cameraState = 1;
+            camAnim.enabled = true;
+            camAnim.Play("HostageIdle");
+
+            dice.SetActive(true);
+            DiceCheckSurface.diceResult = 0;
+            dice.GetComponent<DiceScript>().TriggerDiceThrow();
+            waitingForDiceResult = true;
+
         }
         else
         {
@@ -50,7 +89,7 @@ public class RoundControl : MonoBehaviour
 
     IEnumerator roundCountdown()
     {
-        yield return new WaitForSeconds(90);
+        yield return new WaitForSeconds(10);
         winCheck();
     }
 }

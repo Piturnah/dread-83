@@ -18,7 +18,7 @@ public class HostageSpawner : MonoBehaviour
         float instantiationDistance = bounds[1] / (num+1);
         for(int i = 0; i < num; i++)
         {
-            Instantiate(hostage, new Vector3(transform.position.x - (bounds[1]/2) + (instantiationDistance * (i + 1)), transform.position.y, transform.position.z), Quaternion.identity);
+            Instantiate(hostage, new Vector3(transform.position.x, transform.position.y, transform.position.z - (bounds[1] / 2) + (instantiationDistance * (i + 1))), Quaternion.identity);
         }
     }
 }

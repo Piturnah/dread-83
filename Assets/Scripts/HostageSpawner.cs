@@ -9,14 +9,13 @@ public class HostageSpawner : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = new Color(1,0,0, 1f);
+        Gizmos.color = new Color(0,0,1, 1f);
         Gizmos.DrawWireCube(transform.position, new Vector3(bounds[1],0,bounds[0]));
     }
 
     public void spawnHostage(int num = 1)
     {
         float instantiationDistance = bounds[1] / (num+1);
-        Debug.Log(instantiationDistance);
         for(int i = 0; i < num; i++)
         {
             Instantiate(hostage, new Vector3(transform.position.x - (bounds[1]/2) + (instantiationDistance * (i + 1)), transform.position.y, transform.position.z), Quaternion.identity);

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - EnemyAttack
   - PlatWall
+  - Enemy
   layers:
   - Default
   - TransparentFX

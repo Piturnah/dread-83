@@ -43,10 +43,6 @@ public class UIController : MonoBehaviour
         StartCoroutine(KillAnimator());
     }
 
-    void NewRound() {
-
-    }
-
     private void Update() {
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)) && finishedDialog && CameraController.cameraState == 1 && dialogIndex <= dialogs.Length) {
             if (dialogIndex == dialogs.Length) {
@@ -61,7 +57,7 @@ public class UIController : MonoBehaviour
         yield return new WaitForSeconds(4);
         cameraAnimator.enabled = false;
         CameraController.cameraState = 0;
-        FindObjectOfType<EnemySpawn>().SpawnEnemies(10);
+        FindObjectOfType<RoundControl>().NewRound(1);
     }
 
     IEnumerator Typewriter(string story, float btwCharDelay) {

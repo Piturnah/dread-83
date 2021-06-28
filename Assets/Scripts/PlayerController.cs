@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour {
     public LayerMask enemies;
     bool attacking = true;
 
+    public bool roundEnded = false;
+
     private void Awake() {
         rb = gameObject.GetComponent<Rigidbody>();
 
@@ -50,34 +52,33 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
-        if (rb.velocity.magnitude < 1f) {
-            if (!dashing) {
-                PerformMovement();
-            }
-            else {
-                if (Time.time >= startDashTime + dashDelay) {
-                    FindObjectOfType<AudioManager>().Play("dash");
-                    transform.Translate(transform.forward * dashDistance, Space.World);
-                    dashEffectTimeRemaining = dashEffectTime;
-                    dashEffect = Instantiate(dashObject, DashEffectEmpty.transform);
-                    dashEffect.transform.parent = null;
-                    dashing = false;
+        if (!roundEnded) {
+            if (rb.velocity.magnitude < 1f) {
+                if (!dashing) {
+                    PerformMovement();
+                }
+                else {
+                    if (Time.time >= startDashTime + dashDelay) {
+                        FindObjectOfType<AudioManager>().Play("dash");
+                        transform.Translate(transform.forward * dashDistance, Space.World);
+                        dashEffectTimeRemaining = dashEffectTime;
+                        dashEffect = Instantiate(dashObject, DashEffectEmpty.transform);
+                        dashEffect.transform.parent = null;
+                        dashing = false;
+                    }
                 }
             }
-        }
 
-        if (dashEffectTimeRemaining > 0)
-        {
-            dashEffectTimeRemaining -= Time.deltaTime;
-        }
-        else
-        {
-            Destroy(dashEffect);
-        }
+            if (dashEffectTimeRemaining > 0) {
+                dashEffectTimeRemaining -= Time.deltaTime;
+            }
+            else {
+                Destroy(dashEffect);
+            }
 
-        if (gameObject.transform.position.y < -5)
-        {
-            FindObjectOfType<RoundControl>().InitRoundLoss();
+            if (gameObject.transform.position.y < -5) {
+                FindObjectOfType<RoundControl>().InitRoundLoss();
+            }
         }
     }
 

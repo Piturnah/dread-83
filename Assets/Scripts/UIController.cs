@@ -25,7 +25,8 @@ public class UIController : MonoBehaviour
         CameraController.cameraState = 0;
         mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
 
-        SetStateZero();
+        FindObjectOfType<PlayerController>().roundEnded = true;
+        SetStateOne();
     }
 
     void SetStateOne() {
@@ -58,6 +59,7 @@ public class UIController : MonoBehaviour
         cameraAnimator.enabled = false;
         CameraController.cameraState = 0;
         FindObjectOfType<RoundControl>().NewRound(1);
+        FindObjectOfType<PlayerController>().roundEnded = false;
     }
 
     IEnumerator Typewriter(string story, float btwCharDelay) {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoundControl : MonoBehaviour
 {
-    static int NumberOfHostages = 20;
+    public static int NumberOfHostages = 15;
     public GameObject player;
     public GameObject UI;
     public GameObject UI2;
@@ -26,22 +26,21 @@ public class RoundControl : MonoBehaviour
         FindObjectOfType<EnemySpawn>().SpawnEnemies(round_num * 5);
         player.transform.position = player_pos;
         global_round_num = round_num;
-        StartCoroutine(roundCountdown());
+        StartCoroutine(roundCountdown(global_round_num));
     }
 
     private void Update() {
         if (waitingForDiceResult && DiceCheckSurface.diceResult != 0) {
             waitingForDiceResult = false;
-            Debug.Log(DiceCheckSurface.diceResult);
+            NumberOfHostages -= DiceCheckSurface.diceResult;
             FindObjectOfType<HostageSpawner>().spawnHostage(DiceCheckSurface.diceResult);
             StartCoroutine(PanTime());
         }
 
-        if (NumberOfHostages < 0)
+        if (NumberOfHostages <= 0)
         {
             //You've won
             UI2.SetActive(true);
-            Application.Quit();
         }
     }
 
@@ -49,6 +48,7 @@ public class RoundControl : MonoBehaviour
         yield return new WaitForSeconds(4);
         anim.enabled = false;
         CameraController.cameraState = 0;
+        FindObjectOfType<PlayerController>().roundEnded = false;
         NewRound(global_round_num + 1);
 
     }
@@ -61,11 +61,12 @@ public class RoundControl : MonoBehaviour
     }
 
     public void InitRoundLoss() {
+        FindObjectOfType<PlayerController>().roundEnded = true;
         GameObject[] gos = GameObject.FindGameObjectsWithTag("Enemy");
 
         //Lost Round
         foreach (GameObject go in gos) {
-            Destroy(go);
+            Destroy(go.gameObject);
         }
 
         Animator camAnim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
@@ -122,9 +123,11 @@ public class RoundControl : MonoBehaviour
         waitingForDiceResult = true;
     }
 
-    IEnumerator roundCountdown()
+    IEnumerator roundCountdown(int currentRound)
     {
-        yield return new WaitForSeconds(10);
-        winCheck();
+        yield return new WaitForSeconds(60);
+        if (global_round_num == currentRound) {
+            winCheck();
+        }
     }
 }

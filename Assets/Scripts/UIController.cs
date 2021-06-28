@@ -23,7 +23,7 @@ public class UIController : MonoBehaviour
         CameraController.cameraState = 0;
         mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
 
-        SetStateOne();
+        SetStateZero();
     }
 
     void SetStateOne() {
@@ -35,12 +35,16 @@ public class UIController : MonoBehaviour
         dialogBox.transform.parent.gameObject.SetActive(true);
     }
 
+    void SetStateZero() {
+        dialogBox.transform.parent.gameObject.SetActive(false);
+        cameraAnimator.SetTrigger("PanToPlayer");
+        StartCoroutine(KillAnimator());
+    }
+
     private void Update() {
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)) && UIController.finishedDialog && CameraController.cameraState == 1 && dialogIndex <= dialogs.Length) {
             if (dialogIndex == dialogs.Length) {
-                dialogBox.transform.parent.gameObject.SetActive(false);
-                cameraAnimator.SetTrigger("PanToPlayer");
-                StartCoroutine(KillAnimator());
+                SetStateZero();
                 return;
             }
             StartCoroutine(Typewriter(dialogs[dialogIndex], charDelay));

@@ -114,8 +114,7 @@ public class PlayerController : MonoBehaviour {
             dashing = true;
             startDashTime = Time.time;
             foreach (Animator anim in playerAnimator) {
-                anim.SetBool("Dashing", dashing);
-                anim.SetBool("Attacking", attacking);
+                anim.SetTrigger("Dash");
             }       
         }
     }
